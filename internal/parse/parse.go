@@ -37,13 +37,15 @@ func EnvFile(bs string) (map[string]string, error) {
 		}
 		// Value defaults to "" if not present
 		if len(submatch) >= 3 {
-			value = strings.Trim(submatch[2], "\\s")
-			firstValueChar := value[0]
-			// Strip quotes from beginning and end of string
-			value = quoteReplaceRegex.ReplaceAllString(value, "$2")
-			if firstValueChar == '"' {
-				value = strings.ReplaceAll(value, "\\n", "\n")
-				value = strings.ReplaceAll(value, "\\r", "\r")
+			value = strings.TrimSpace(submatch[2])
+			if len(value) > 0 {
+				firstValueChar := value[0]
+				// Strip quotes from beginning and end of string
+				value = quoteReplaceRegex.ReplaceAllString(value, "$2")
+				if firstValueChar == '"' {
+					value = strings.ReplaceAll(value, "\\n", "\n")
+					value = strings.ReplaceAll(value, "\\r", "\r")
+				}
 			}
 		}
 
