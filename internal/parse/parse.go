@@ -48,7 +48,6 @@ func EnvFile(bs string) (map[string]string, error) {
 				}
 			}
 		}
-
 		ret[key] = value
 	}
 

@@ -44,17 +44,6 @@ func buildEnviron(input map[string]string) []string {
 	return original
 }
 
-func exportEnv(e map[string]string) error {
-
-	for k, v := range e {
-		err := os.Setenv(k, v)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
 func runProc(procPath string, args []string, env []string) error {
 
 	command := exec.Command(procPath, args...)
